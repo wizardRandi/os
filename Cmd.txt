@@ -1,0 +1,69 @@
+ls : shows files in present directory
+echo : syntax: echo text>>filename.txt
+    used to move data into a file
+read : syntax: read [options] [name]
+    used to read contents of a line into a variable; to take user input
+cat : syntax: cat filrname.txt
+    used to display contants of file
+touch : syntax: touch file_name.txt
+      use to create empty file
+test : syntax: [expression]
+    use in conditional statement
+loops:
+for loop:
+  for var in list
+  do
+    echo statement
+  done
+
+while loop:
+  while [condition]
+  do
+    commands
+  done
+
+while infinite loop:
+  while true
+  do
+    commands
+  done
+
+until loop:
+  until [condition]
+  do
+    commands
+  done
+
+if loop:
+  if [expression]
+  then
+    statemnets
+  fi
+
+if-else
+  if [expression]
+    then
+      statemnets
+  elif [exp]
+    then
+      st
+  else
+      st
+  fi
+  fi
+
+grep : syntax: grep [options] PATTERN []
+  to a find a match
+sed : synatx: sed[OPTION]
+  edits stream
+diff : syntax: diff [option] file1 file2
+  compares two files line by line and shows thier difference
+
+pwd : shows current directory
+mkdir : syntax: mkdir folder_name 
+      use to create folder
+rmdir : syntax : rmdir directory_name
+      use to delete empty directory
+rm : syntax : rm directory_name
+      use to delete directory
+ping : use to show the network connections

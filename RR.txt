@@ -1,0 +1,72 @@
+// Premptive Round Robin
+
+#include <stdio.h>
+int main(void) {
+  int n, bt[20], at[20], st[20], et[20], tat[20], wt[20], i, tq, x,
+      sum = 0, count = 0, temp[20];
+  float avg_tat = 0, avg_wt = 0;
+
+  // code to get total no of processes
+  printf("Enter number of process:");
+  scanf("%d", &n);
+  x = n; // var to store process no
+  // code ends
+
+  // code to get time quantum
+  printf("Enter time quantum:");
+  scanf("%d", &tq);
+  // code ends
+
+  // arrival time input
+  printf("\nEnter Arrival Time:\n");
+  for (i = 0; i < n; i++) {
+    printf("p%d:", i + 1);
+    scanf("%d", &at[i]);
+  }
+  // code ends
+
+  // burst time input
+  printf("\nEnter Burst Time:\n");
+  for (i = 0; i < n; i++) {
+    printf("p%d:", i + 1);
+    scanf("%d", &bt[i]);
+    temp[i] = bt[i];
+  }
+  // code ends
+
+  // Display the process No, burst time, Turn Around Time and the waiting time
+  printf("\n Process \t Burst Time \t\t TAT \t\t Waiting Time ");
+  for (sum = 0, i = 0; x != 0;) {
+    if (temp[i] <= tq && temp[i] > 0) {
+      sum = sum + temp[i];
+      temp[i] = 0;
+      count = 1;
+    } else if (temp[i] > 0) {
+      temp[i] = temp[i] - tq;
+      sum = sum + tq;
+    }
+
+    if (temp[i] == 0 && count == 1) {
+      x--;
+      printf("\nP[%d] \t\t %d\t\t\t\t %d\t\t\t %d", i + 1, bt[i], sum - at[i],
+             sum - at[i] - bt[i]);
+      avg_tat = avg_tat + sum - at[i];
+      avg_wt = avg_wt + sum - at[i] - bt[i];
+      count = 0;
+    }
+    if (i == n - 1) {
+      i = 0;
+    } else if (at[i + 1] <= sum) {
+      i++;
+    } else {
+      i = 0;
+    }
+  }
+  // avg value calculation
+  avg_tat = avg_tat / n;
+  avg_wt = avg_wt / n;
+  // code ends
+  printf("\n Average Turn Around Time: \t%.2f\n Average Waiting Time: \t%.2f",
+         avg_wt, avg_tat);
+  return 0;
+}

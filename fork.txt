@@ -1,0 +1,75 @@
+
+#include <stdio.h>
+#include <unistd.h>
+
+// code to sort elements in ascending order
+void Sort_asc(int array[], int n) {
+  for (int i = 0; i < n; i++) {
+    for (int j = i + 1; j < n; j++) {
+      if (array[i] > array[j]) {
+        int temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+      }
+    }
+  }
+}
+// code ends
+
+// code to sort elements in descending order
+void Sort_desc(int array[], int n) {
+  for (int i = 0; i < n; i++) {
+    for (int j = i + 1; j < n; j++) {
+      if (array[i] < array[j]) {
+        int temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+      }
+    }
+  }
+}
+// code ends
+
+// driver code
+int main(void) {
+  int a[100], n;
+  // code to take no of elements
+  printf("Enter no of elements:\n");
+  scanf("%d", &n);
+  // code ends
+  // code to take elements
+  printf("Enter the elements to sort:\n");
+  for (int i = 0; i < n; i++) {
+    scanf("%d", &a[i]);
+  }
+  // code ends
+
+  int pid = fork(); // creating child process
+  // parent sorts in ascending order
+  if (pid > 0) {
+    Sort_asc(a, n);
+
+    for (int i = 0; i < n; ++i) {
+      printf("\n%d  process id:%d  ppid: %d\n", a[i], getpid(), getppid());
+      sleep(1);
+    }
+    sleep(100); // for making child as zombie process
+    wait();     // to terminate child before parent
+    printf("\nParent terminating\n");
+
+  }
+  // child sorts in descending order
+  else if (pid == 0) {
+    Sort_desc(a, n);
+
+    for (int i = 0; i < n; i++) {
+      printf("\t\t\t %d  process id:%d  ppid: %d\n", a[i], getpid(), getppid());
+      sleep(2);
+    }
+    printf("\nChild terminating\n");
+  } else {
+    printf("\nChild process not created\n");
+  }
+
+  // use ps commmnad to display status of the process on new terminal
+}
